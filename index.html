@@ -40,8 +40,9 @@
 fetch('https://api-open.data.gov.sg/v2/real-time/api/two-hr-forecast')
     .then(response => response.json())
     .then(responsedata => {
-        let timestamp = responsedata.data.items[0].updated_timestamp; // Fixed typo: updated_timestamp
-        let forecasts = responsedata.data.items[0].forecasts;
+        const weatherData = responsedata.data.items[0]; // Access the first item
+        const timestamp = weatherData.updated_timestamp; // Get the updated timestamp
+        const forecasts = weatherData.forecasts;
 
         console.log(timestamp);
         console.log(forecasts);
