@@ -47,7 +47,12 @@ fetch('https://api-open.data.gov.sg/v2/real-time/api/two-hr-forecast')
         console.log(forecasts);
         
         // Update the timestring header with the last updated timestamp
-        document.getElementById('timestring').innerText = `Last updated: ${new Date(timestamp).toLocaleString()}`;
+        const date = new Date(timestamp);
+        if (isNaN(date)) {
+            document.getElementById('timestring').innerText = 'Invalid date format';
+        } else {
+            document.getElementById('timestring').innerText = `Last updated: ${date.toLocaleString()}`;
+        }
 
         // Populate the table with forecasts
         let tableBody = document.getElementById('weatherTable');
