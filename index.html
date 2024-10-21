@@ -1,42 +1,66 @@
-<!DOCTYPE html>
-<html lang="en">
+
+<!doctype html>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Real-time Weather Forecast</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Assignment 1</title>
     <style>
         body {
-            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+            margin: 20px;
         }
         table {
-            margin-top: 20px;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
         }
         th {
-            background-color: #007bff;
-            color: white;
+            background-color: #f2f2f2;
         }
-        .timestamp {
-            margin-top: 20px;
-            font-style: italic;
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1 class="mt-4">Real-time Weather Forecast</h1>
-        <table class="table table-bordered table-striped">
-            <thead>
-                <tr>
-                    <th>Area</th>
-                    <th>Forecast</th>
-                </tr>
-            </thead>
-            <tbody id="weatherData"></tbody>
-        </table>
-        <div class="timestamp" id="timestamp"></div>
-    </div>
 
-    <script src="script.js"></script>
+<h2>Singapore 2-hr Weather Forecast</h2>
+<h4 id="timestring"></h4>
+<table id="weatherTable">
+    <tr>
+        <th>Area</th>
+        <th>Forecast</th>
+    </tr>
+</table>
+
+<script>
+fetch('https://api-open.data.gov.sg/v2/real-time/api/two-hr-forecast')
+    .then(response => response.json())
+    .then(responsedata => {
+        let timestamp = responsedata.data.items[0].updated_timestamp; // Fixed typo: updated_timestamp
+        let forecasts = responsedata.data.items[0].forecasts;
+
+        console.log(timestamp);
+        console.log(forecasts);
+        
+        // Update the timestring header with the last updated timestamp
+        document.getElementById('timestring').innerText = `Last updated: ${new Date(timestamp).toLocaleString()}`;
+
+        // Populate the table with forecasts
+        let tableBody = document.getElementById('weatherTable');
+
+        forecasts.forEach(forecast => {
+            let row = document.createElement('tr');
+            row.innerHTML = `<td>${forecast.area}</td><td>${forecast.forecast}</td>`;
+            tableBody.appendChild(row);
+        });
+    })
+    .catch(error => {
+        console.error('Fetch error:', error);
+    });
+</script>
 </body>
 </html>
