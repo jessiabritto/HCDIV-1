@@ -11,7 +11,7 @@ async function fetchWeatherData() {
 
         // Access the relevant data
         const weatherData = data.data.items[0]; // Access the first item
-        const updatedTimestamp = weatherData.updated_timestamp; // Get the updated timestamp
+        const updatedTimestamp = weatherData.update_timestamp; // Get the updated timestamp
         if (!updatedTimestamp) {
             console.error('Updated timestamp not found in the response');
             document.getElementById('timestamp').innerText = 'Updated timestamp not found';
