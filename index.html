@@ -2,7 +2,7 @@
 <!doctype html>
 <html>
 <head>
-    <title>Assignment 1</title>
+    <title>Singapore 2-hr Weather Forecast</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -28,7 +28,7 @@
 <body>
 
 <h2>Singapore 2-hr Weather Forecast</h2>
-<h4 id="timestring"></h4>
+<h4 id="timestamp"></h4>
 <table id="weatherTable">
     <tr>
         <th>Area</th>
@@ -36,47 +36,6 @@
     </tr>
 </table>
 
-<script>
-fetch('https://api-open.data.gov.sg/v2/real-time/api/two-hr-forecast')
-    .then(response => response.json())
-    .then(responsedata => {
-        console.log('Full Response:', responsedata);
-
-        const weatherData = responsedata.data.items[0]; // Access the first item
-        const timestamp = weatherData.updated_timestamp; // Get the updated timestamp
-        const forecasts = weatherData.forecasts;
-
-        console.log('Timestamp:', timestamp);
-        console.log(forecasts);
-        
-        // Update the timestring header with the last updated timestamp
-        if (timestamp) {
-            const adjustedTimestamp = timestamp.endsWith('Z') ? timestamp : timestamp + 'Z'; // Append 'Z' if missing
-            const date = new Date(adjustedTimestamp);
-            
-            if (isNaN(date.getTime())) {
-                document.getElementById('timestring').innerText = 'Invalid date format';
-            } else {
-                document.getElementById('timestring').innerText = `Last updated: ${date.toLocaleString()}`;
-            }
-        } else {
-            document.getElementById('timestring').innerText = 'Timestamp not found';
-        }
-
-
-        // Populate the table with forecasts
-        const tableBody = document.getElementById('weatherTable');
-
-        forecasts.forEach(forecast => {
-            const row = document.createElement('tr');
-            row.innerHTML = `<td>${forecast.area}</td><td>${forecast.forecast}</td>`;
-            tableBody.appendChild(row);
-        });
-    })
-    .catch(error => {
-        console.error('Fetch error:', error);
-        document.getElementById('timestring').innerText = 'Error fetching data';
-    });
-</script>
+<script src="fetchWeather.js"></script>
 </body>
 </html>
