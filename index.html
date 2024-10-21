@@ -44,7 +44,7 @@ fetch('https://api-open.data.gov.sg/v2/real-time/api/two-hr-forecast')
         const timestamp = weatherData.updated_timestamp; // Get the updated timestamp
         const forecasts = weatherData.forecasts;
 
-        console.log(timestamp);
+        console.log('Timestamp:', timestamp);
         console.log(forecasts);
         
         // Update the timestring header with the last updated timestamp
