@@ -40,6 +40,8 @@
 fetch('https://api-open.data.gov.sg/v2/real-time/api/two-hr-forecast')
     .then(response => response.json())
     .then(responsedata => {
+        console.log('Full Response:', responsedata);
+
         const weatherData = responsedata.data.items[0]; // Access the first item
         const timestamp = weatherData.updated_timestamp; // Get the updated timestamp
         const forecasts = weatherData.forecasts;
@@ -48,24 +50,32 @@ fetch('https://api-open.data.gov.sg/v2/real-time/api/two-hr-forecast')
         console.log(forecasts);
         
         // Update the timestring header with the last updated timestamp
-        const date = new Date(timestamp);
-        if (isNaN(date)) {
-            document.getElementById('timestring').innerText = 'Invalid date format';
+        if (timestamp) {
+            const adjustedTimestamp = timestamp.endsWith('Z') ? timestamp : timestamp + 'Z'; // Append 'Z' if missing
+            const date = new Date(adjustedTimestamp);
+            
+            if (isNaN(date.getTime())) {
+                document.getElementById('timestring').innerText = 'Invalid date format';
+            } else {
+                document.getElementById('timestring').innerText = `Last updated: ${date.toLocaleString()}`;
+            }
         } else {
-            document.getElementById('timestring').innerText = `Last updated: ${date.toLocaleString()}`;
+            document.getElementById('timestring').innerText = 'Timestamp not found';
         }
 
+
         // Populate the table with forecasts
-        let tableBody = document.getElementById('weatherTable');
+        const tableBody = document.getElementById('weatherTable');
 
         forecasts.forEach(forecast => {
-            let row = document.createElement('tr');
+            const row = document.createElement('tr');
             row.innerHTML = `<td>${forecast.area}</td><td>${forecast.forecast}</td>`;
             tableBody.appendChild(row);
         });
     })
     .catch(error => {
         console.error('Fetch error:', error);
+        document.getElementById('timestring').innerText = 'Error fetching data';
     });
 </script>
 </body>
