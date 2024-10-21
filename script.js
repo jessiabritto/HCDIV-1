@@ -6,6 +6,8 @@ async function fetchWeatherData() {
         }
         const data = await response.json();
         console.log(data); // Check the structure here
+        console.log(timestamp);
+
 
         // Access the relevant data
         const weatherData = data.data.items[0]; // Adjust based on the correct path to the data
