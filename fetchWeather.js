@@ -7,29 +7,28 @@ async function fetchWeatherData() {
         }
 
         const data = await response.json();
-        console.log(data); // Check the structure here
-
-        // Access the relevant data
-        const weatherData = data.data.items[0]; // Access the first item
-        const updatedTimestamp = weatherData.update_timestamp; // Get the updated timestamp
+        console.log(data); 
+        
+        const weatherData = data.data.items[0]; 
+        const updatedTimestamp = weatherData.update_timestamp; 
         if (!updatedTimestamp) {
             console.error('Updated timestamp not found in the response');
             document.getElementById('timestamp').innerText = 'Updated timestamp not found';
-            return; // Exit the function
+            return; 
         }
-        // Convert timestamp to Date object
+       
         const date = new Date(updatedTimestamp);
 
-        // Validate date
+        
         if (isNaN(date.getTime())) {
             console.error('Invalid date:', updatedTimestamp);
             document.getElementById('timestamp').innerText = 'Invalid date format';
         } else {
-            const lastUpdate = date.toLocaleString(); // Convert to local string format
+            const lastUpdate = date.toLocaleString(); 
             document.getElementById('timestamp').innerText = `Data last updated: ${lastUpdate}`;
         }
 
-        // Populate the table with forecasts
+        
         const tableBody = document.getElementById('weatherTable');
 
         weatherData.forecasts.forEach(forecast => {
@@ -44,5 +43,5 @@ async function fetchWeatherData() {
     }
 }
 
-// Call the function to fetch the weather data
+
 fetchWeatherData();
