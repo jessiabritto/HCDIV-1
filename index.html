@@ -1,20 +1,34 @@
-
 <!doctype html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>Singapore 2-hr Weather Forecast</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
+            transition: background-color 0.3s, color 0.3s; /* Smooth transition for theme change */
         }
         h2, h4 {
             font-family: 'Georgia', serif; /* Change the font */
-            color: #b22222; /* Change the color (e.g., firebrick red) */
+        }
+        /* Daytime styles */
+        .daytime {
+            background-color: #add8e6; /* Light blue */
+            color: black; /* Black text */
+        }
+        /* Nighttime styles */
+        .nighttime {
+            background-color: black; /* Black background */
+            color: white; /* White text */
         }
         table {
             border-collapse: collapse;
             width: 100%;
+            margin-top: 20px;
         }
         th, td {
             border: 1px solid #7a5d5d;
@@ -23,10 +37,23 @@
             font-family: 'Georgia', serif;
         }
         th {
-            background-color: #ffcfcf;
+            background-color: rgba(255, 255, 255, 0.8); 
+        }
+        /* Daytime table styles */
+        .daytime table {
+            background-color: rgba(173, 216, 230, 0.9); /* Slightly transparent light blue */
+            color: black; /* Black text */
+        }
+        /* Nighttime table styles */
+        .nighttime table {
+            background-color: #343a40; /* Dark background for the table */
+            color: white; /* Light text for readability */
+        }
+        th, td {
+            color: inherit; /* Inherit color from body */
         }
         tr:nth-child(even) {
-            background-color: #feeaea;
+            background-color: rgba(227, 227, 227, 0.8); /* Lighten the even row background */
         }
     </style>
 </head>
@@ -34,13 +61,37 @@
 
 <h2>Singapore 2-hr Weather Forecast</h2>
 <h4 id="timestamp"></h4>
-<table id="weatherTable">
-    <tr>
-        <th>Area</th>
-        <th>Forecast</th>
-    </tr>
+<table id="weatherTable" class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Area</th>
+            <th>Forecast</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Weather data will be populated here -->
+    </tbody>
 </table>
 
 <script src="fetchWeather.js"></script>
+<script>
+    // Function to determine if it's day or night
+    function updateTheme() {
+        const currentHour = new Date().getHours();
+        const body = document.body;
+
+        // Assuming daytime is from 6 AM to 6 PM
+        if (currentHour >= 6 && currentHour < 18) {
+            body.classList.add('daytime');
+            body.classList.remove('nighttime');
+        } else {
+            body.classList.add('nighttime');
+            body.classList.remove('daytime');
+        }
+    }
+
+    // Call the function to set the initial theme
+    updateTheme();
+</script>
 </body>
 </html>
