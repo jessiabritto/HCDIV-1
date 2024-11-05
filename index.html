@@ -10,20 +10,20 @@
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
-            transition: background-color 0.3s, color 0.3s; /* Smooth transition for theme change */
+            transition: background-color 0.3s, color 0.3s; 
         }
         h2, h4 {
-            font-family: 'Georgia', serif; /* Change the font */
+            font-family: 'Georgia', serif; 
         }
         /* Daytime styles */
         .daytime {
-            background-color: #add8e6; /* Light blue */
-            color: black; /* Black text */
+            background-color: #add8e6; 
+            color: black; 
         }
         /* Nighttime styles */
         .nighttime {
-            background-color: black; /* Black background */
-            color: white; /* White text */
+            background-color: black; 
+            color: white; 
         }
         table {
             border-collapse: collapse;
@@ -41,19 +41,19 @@
         }
         /* Daytime table styles */
         .daytime table {
-            background-color: rgba(173, 216, 230, 0.9); /* Slightly transparent light blue */
+            background-color: rgba(173, 216, 230, 0.9); 
             color: black; /* Black text */
         }
         /* Nighttime table styles */
         .nighttime table {
-            background-color: #343a40; /* Dark background for the table */
-            color: white; /* Light text for readability */
+            background-color: #343a40; 
+            color: white; 
         }
         th, td {
-            color: inherit; /* Inherit color from body */
+            color: inherit; 
         }
         tr:nth-child(even) {
-            background-color: rgba(227, 227, 227, 0.8); /* Lighten the even row background */
+            background-color: rgba(227, 227, 227, 0.8); 
         }
     </style>
 </head>
@@ -69,7 +69,7 @@
         </tr>
     </thead>
     <tbody>
-        <!-- Weather data will be populated here -->
+        
     </tbody>
 </table>
 
@@ -80,7 +80,7 @@
         const currentHour = new Date().getHours();
         const body = document.body;
 
-        // Assuming daytime is from 6 AM to 6 PM
+        
         if (currentHour >= 6 && currentHour < 18) {
             body.classList.add('daytime');
             body.classList.remove('nighttime');
@@ -90,7 +90,6 @@
         }
     }
 
-    // Call the function to set the initial theme
     updateTheme();
 </script>
 </body>
