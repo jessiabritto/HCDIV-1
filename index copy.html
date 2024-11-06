@@ -1,0 +1,56 @@
+
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Singapore 2-hr Weather Forecast</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h2, h4 {
+            font-family: 'Georgia', serif; /* Change the font */
+            color: #b22222; /* Change the color (e.g., firebrick red) */
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #7a5d5d;
+            text-align: left;
+            padding: 8px;
+            font-family: 'Georgia', serif;
+        }
+        th {
+            background-color: rgba(255, 207, 207, 0.8); 
+        }
+        tr:nth-child(even) {
+            background-color: rgba(255, 234, 234, 0.8); 
+        }
+    </style>
+</head>
+<body>
+
+<h2>Singapore 2-hr Weather Forecast</h2>
+<h4 id="timestamp"></h4>
+<table id="weatherTable" class="table table-bordered">
+    <thead>
+    <tr>
+        <th>Area</th>
+        <th>Forecast</th>
+    </tr>
+</thead>
+<tbody>
+    <!-- Weather data will be populated here -->
+</tbody>
+
+</table>
+
+<script src="fetchWeather.js"></script>
+</body>
+</html>
